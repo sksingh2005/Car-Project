@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB URI
-const mongoURI = 'mongodb+srv://shashanksgh3:%402005SINGHjvm@cluster0.eoakwss.mongodb.net/car'; // Update with your MongoDB URI
+const mongoURI = 'your mongo url'; // Update with your MongoDB URI
 
 // Connect to MongoDB
 const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
