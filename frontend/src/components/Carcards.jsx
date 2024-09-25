@@ -44,19 +44,20 @@ const CarCard = () => {
 
   return (
     <div>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 ">
       {carData.map((car) => (
         <div
           key={car.id}
-          className="bg-white rounded-lg shadow-lg p-4 border border-gray-200 relative"
+          className="bg-white rounded-lg shadow-lg border border-gray-200 relative flex flex-col"
         >
           {/* Car Image */}
           <img
-            className="w-full h-48 object-cover rounded-lg"
+            className="w-full h-48 object-cover rounded-t-lg"
             src={car.imageUrl}
             alt={car.name}
           />
-          <div className="mt-4">
+          <div className="p-2">
+          <div className="mt-4 ">
             <h2 className="text-lg font-semibold">{car.name}</h2>
             <div className="flex space-x-2 mt-2 text-sm text-gray-500">
               <span>{car.mileage}</span>
@@ -72,38 +73,9 @@ const CarCard = () => {
               onClick={() => toggleLike(car.id)}
               className="text-gray-500 focus:outline-none"
             >
-              {likedCars[car.id] ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-red-500"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 21c-3.313 0-5.943-1.671-8-4.439C1.586 13.416 0 10.348 0 7a7 7 0 0 1 12-5.18A7 7 0 0 1 24 7c0 3.348-1.586 6.416-4 9.561C17.943 19.329 15.313 21 12 21z"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 21c-3.313 0-5.943-1.671-8-4.439C1.586 13.416 0 10.348 0 7a7 7 0 0 1 12-5.18A7 7 0 0 1 24 7c0 3.348-1.586 6.416-4 9.561C17.943 19.329 15.313 21 12 21z"
-                  />
-                </svg>
-              )}
+              
             </button>
+            </div>
           </div>
         </div>
       ))}
@@ -115,4 +87,34 @@ const CarCard = () => {
 
 export default CarCard;
 
-
+// {likedCars[car.id] ? (
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   className="h-6 w-6 text-red-500"
+//                   fill="currentColor"
+//                   viewBox="0 0 24 24"
+//                   stroke="currentColor"
+//                 >
+//                   <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     strokeWidth="2"
+//                     d="M12 21c-3.313 0-5.943-1.671-8-4.439C1.586 13.416 0 10.348 0 7a7 7 0 0 1 12-5.18A7 7 0 0 1 24 7c0 3.348-1.586 6.416-4 9.561C17.943 19.329 15.313 21 12 21z"
+//                   />
+//                 </svg>
+//               ) : (
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   className="h-6 w-6"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   stroke="currentColor"
+//                 >
+//                   <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     strokeWidth="2"
+//                     d="M12 21c-3.313 0-5.943-1.671-8-4.439C1.586 13.416 0 10.348 0 7a7 7 0 0 1 12-5.18A7 7 0 0 1 24 7c0 3.348-1.586 6.416-4 9.561C17.943 19.329 15.313 21 12 21z"
+//                   />
+//                 </svg>
+//               )}

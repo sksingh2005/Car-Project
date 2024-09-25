@@ -25,10 +25,12 @@ export function Caricons() {
 
     return (
         <div className="w-full">
-            <div className="bg-black border rounded-md p-2 flex w-[100%]">
+            
+            <div className="bg-black border rounded-md p-2 flex w-[100%] justify-center items-center">
+                
                 {middle.map((middle) => {
                     return (
-                        <div key={middle.id} className="flex-grow">
+                        <div key={middle.id} className="flex-grow mt-4 flex items-center justify-center">
                             <img
                                 src={middle.imageUrl}
                                 alt={`Car brand ${middle.id}`}
@@ -37,6 +39,7 @@ export function Caricons() {
                         </div>
                     );
                 })}
+                
             </div>
         </div>
     );

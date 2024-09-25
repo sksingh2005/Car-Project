@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mONGO_URL");
+mongoose.connect("mongodb+srv://shashanksgh3:%402005SINGHjvm@cluster0.eoakwss.mongodb.net/car");
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -47,9 +47,24 @@ const bookingschema=new mongoose.Schema({
     }
 
 })
+
+const ImageSchema=new mongoose.Schema({
+    carname:String,
+    mileage:String,
+    fueltype:String,
+    transmission:String,
+    price:String,
+    image:String,
+
+},{
+    collection:"Image"
+});
+
+const Image=mongoose.model('Image',ImageSchema);
 const User = mongoose.model('User', userSchema);
 const Booking=mongoose.model('Booking',bookingschema)
 module.exports = {
     User,
-    Booking
+    Booking,
+    Image
 };

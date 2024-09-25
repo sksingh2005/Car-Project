@@ -8,6 +8,8 @@ import { Services } from './components/Service'
 import { Book } from './components/Bookservice'
 import { About } from './components/About'
 import { Contact } from './components/Contact'
+import ScrollToTop from './components/Scrolltop'
+import AdminPage from './components/Admin'
 
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <ScrollToTop/>
         <Routes>
             <Route element={<Home/>} path='/'></Route>
             <Route element={<Buycars/>} path='/cars'></Route>
@@ -23,6 +26,7 @@ function App() {
             <Route element={<Book/>} path='/book-service'/>
             <Route element={<About/>} path='/about-us'/>
             <Route element={<Contact/>} path='/contact-us'/>
+            <Route element={<AdminPage/>} path='/admin'/>
         </Routes>
       </BrowserRouter>
     </>
