@@ -25,7 +25,10 @@ const CarCard3 = () => {
         {carData.map((car, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-lg border border-gray-200 relative flex flex-col"
+            className="bg-white rounded-lg shadow-lg border border-gray-200 relative flex flex-col cursor-pointer"
+            onClick={() => {
+              navigate(`/cars/${car.carName.replace(/\s+/g, '-').toLowerCase()}`);
+            }}
           >
             {/* Car Image */}
             {car.images && car.images.length > 0 ? (
@@ -33,9 +36,6 @@ const CarCard3 = () => {
                 className="w-full h-48 object-cover rounded-t-lg"
                 src={`http://localhost:3001/images/${car.images[0]}`} // Access the first image
                 alt={car.carName}
-                onClick={() => {
-                  navigate(`/cars/${car.carName.replace(/\s+/g, '-').toLowerCase()}`);
-                }}
               />
             ) : (
               <div className="w-full h-48 bg-gray-200 rounded-t-lg flex items-center justify-center">
@@ -53,7 +53,7 @@ const CarCard3 = () => {
               </div>
               {/* Price Section */}
               <div className="flex justify-between items-center mt-4">
-                <p className="text-xl font-bold">₹{car.price/100000} Lakh</p>
+                <p className="text-xl font-bold">₹{car.price / 100000} Lakh</p>
               </div>
             </div>
           </div>

@@ -2,7 +2,20 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Importing arrow icons
+import Navbar from "./Navbar";
+
+const images = [
+  "/MS.jpg", // Use your image paths
+  "/forward.jpg",
+  "/Backward.jpg",
+  "/Right.jpg",
+  "/South.jpg",
+  "/Box.jpg",
+  "/Inside.jpg",
+  "/Speedometer.jpg",
+  "/Back.jpg"
+];
 
 // Custom arrow components for navigation
 const NextArrow = ({ onClick }) => {
@@ -27,9 +40,9 @@ const PrevArrow = ({ onClick }) => {
   );
 };
 
-export default function CarouselComponent({ images }) {
+export default function CarouselComponent1()  {
   const settings = {
-    dots: false,
+    dots: false, // Disable dots
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -41,15 +54,21 @@ export default function CarouselComponent({ images }) {
   };
 
   return (
-    <div className="relative h-[100vh] mx-auto overflow-hidden"> {/* Full-screen height and max width for a nice appearance */}
+    <div className="relative h-[100vh] overflow-hidden"> {/* Full screen height container */}
+      <div className="absolute top-0 left-0 right-0 z-20"> {/* Navbar fixed at top */}
+        <div className="p-2">
+            <Navbar />
+        </div>
+        
+      </div>
       <Slider {...settings}>
         {images.map((image, index) => (
           <div key={index} className="relative">
             <div
-              className="w-full h-[100vh]  bg-center bg-cover" // Full-screen height for each image
+              className="w-full h-[100vh] bg-cover bg-center"
               style={{ backgroundImage: `url(${image})` }}
             >
-              {/* The image is set as a background */}
+              {/* The image is now a background */}
             </div>
           </div>
         ))}

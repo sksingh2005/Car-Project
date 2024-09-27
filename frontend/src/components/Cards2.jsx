@@ -109,7 +109,7 @@ const CarCard2 = () => {
   return (
     <div>
       <div className="p-4 font-bold text-2xl">
-        <p>{carData.length+count.length} Used car Available</p>
+        <p>{carData.length+count} Used car Available</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 ">
         {}

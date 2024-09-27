@@ -1,5 +1,6 @@
 import Slider from "react-slick";
 import React, { lazy, Suspense } from "react";
+import CarouselComponent1 from "./Courselcomponent1";
 
 // Lazy loaded components
 const Footer = lazy(() => import("./Footer"));
@@ -21,7 +22,7 @@ export default function Ms(){
     };
     return <div>
         <div>
-            <CarouselComponent/>
+            <CarouselComponent1/>
 
         </div>
         <div className="grid grid-cols-3 p-6">
