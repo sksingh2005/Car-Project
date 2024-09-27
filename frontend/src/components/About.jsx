@@ -1,9 +1,12 @@
-import { Caricons } from "./Caricons";
-import { Footer } from "./Footer";
-import Navbar from "./Navbar";
+import React, { lazy, Suspense } from "react";
+
+// Lazy loaded components
+const Footer = lazy(() => import("./Footer"));
+const Navbar = lazy(() => import("./Navbar"));
+const Caricons = lazy(() => import("./Caricons"));
 import { FaCar, FaHandshake, FaStar } from 'react-icons/fa'; // Icons from react-icons
 
-export function About(){
+export default function About(){
     const reviews = [
         {
           name: "Jane Cooper",

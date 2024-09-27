@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "./Navbar";
 import FormComponent from "./Slot";
 
-export function Book(){
+export default function Book(){
     const [name,setName]=useState(" ");
     const [number,setNumber]=useState(" ");
     const [time,setTime]=useState(" ");

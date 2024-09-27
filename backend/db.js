@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("MONGO URL");
+mongoose.connect("mongodb+srv://shashanksgh3:%402005SINGHjvm@cluster0.eoakwss.mongodb.net/car");
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -24,6 +24,34 @@ const userSchema = new mongoose.Schema({
         required: true
     }
 });
+const userschema1=new mongoose.Schema({
+    username:{
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
+        minLength: 3,
+        maxLength: 30
+    },
+    firstname:{
+        type: String,
+        required: true,
+        trim: true,
+        maxLength: 50
+    },
+    lastname:{
+        type: String,
+        required: true,
+        trim: true,
+        maxLength: 50
+    },
+    password:{
+        type: String,
+        required: true,
+        minLength: 6
+    }
+})
 const bookingschema=new mongoose.Schema({
     username: {
         type: String,
@@ -59,12 +87,13 @@ const ImageSchema=new mongoose.Schema({
 },{
     collection:"Image"
 });
-
+const Admin=mongoose.model('Admin',userschema1);
 const Image=mongoose.model('Image',ImageSchema);
 const User = mongoose.model('User', userSchema);
 const Booking=mongoose.model('Booking',bookingschema)
 module.exports = {
     User,
     Booking,
-    Image
+    Image,
+    Admin
 };

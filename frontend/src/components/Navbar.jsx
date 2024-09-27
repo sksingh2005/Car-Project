@@ -76,6 +76,11 @@ const Navbar = () => {
           >
             <a className="cursor-pointer" onClick={() => navigate("/contact-us")}>CONTACT US</a>
           </li>
+          <li
+            className={`hover:underline ${isActive("/signin") ? "underline text-black" : ""}`}
+          >
+            <a className="cursor-pointer" onClick={() => navigate("/signin")}>SIGN IN</a>
+          </li>
         </ul>
       </nav>
 
@@ -130,6 +135,9 @@ const Navbar = () => {
           </li>
           <li className={`hover:underline ${isActive("/contact-us") ? "underline text-black" : ""}`}>
             <a className="cursor-pointer" onClick={() => { toggleSidebar(); navigate("/contact-us"); }}>CONTACT US</a>
+          </li>
+          <li className={`hover:underline ${isActive("/signin") ? "underline text-black" : ""}`}>
+            <a className="cursor-pointer" onClick={() => { toggleSidebar(); navigate("/signin"); }}>SIGN IN </a>
           </li>
         </ul>
       </div>

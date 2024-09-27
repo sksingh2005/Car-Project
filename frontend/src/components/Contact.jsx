@@ -1,7 +1,10 @@
-import { Footer } from "./Footer";
-import Navbar from "./Navbar";
+import React, { lazy, Suspense } from "react";
 
-export function Contact(){
+// Lazy loaded components
+const Footer = lazy(() => import("./Footer"));
+const Navbar = lazy(() => import("./Navbar"));
+
+export default  function Contact(){
     return <div>
         <div className="p-2">
             <Navbar/>

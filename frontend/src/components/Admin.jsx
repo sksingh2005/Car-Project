@@ -4,15 +4,15 @@ import axios from 'axios';
 function CarForm() {
     const [formData, setFormData] = useState({
         carName: '',
-        kmDriven: '',
-        makeYear: '',
-        registrationYear: '',
-        rto: '',
-        noOfOwner: '',
-        fuelType: '',
-        transmission: '',
-        insuranceType: '',
-        insuranceValidity: '',
+        mileage: '',
+        makeYear: '2020',  // Default value
+        registrationYear: '2019',  // Default value
+        rto: 'CH 01',  // Default value
+        noOfOwner: '1',  // Default value
+        fuelType: 'Petrol',  // Default value
+        transmission: 'Manual',  // Default value
+        insuranceType: 'Comprehensive',  // Default value
+        insuranceValidity: '2021',  // Default value
         location: '',
         price: '',
         images: []
@@ -26,44 +26,53 @@ function CarForm() {
     const handleFileChange = (e) => {
         setFormData({
             ...formData,
-            images: e.target.files
+            images: Array.from(e.target.files)  // Convert FileList to an array
         });
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = new FormData();
-        
-        // Append form data
-        for (const key in formData) {
-            if (key === 'images') {
-                [...formData.images].forEach(image => {
-                    data.append('pictures', image);
-                });
-            } else {
-                data.append(key, formData[key]);
-            }
-        }
-
+    
+        // Append car details to FormData
+        data.append('carName', formData.carName);
+        data.append('mileage', formData.mileage);
+        data.append('fuelType', formData.fuelType);
+        data.append('transmission', formData.transmission);
+        data.append('price', formData.price);
+    
+        // Append images as 'files'
+        [...formData.images].forEach((image) => {
+            data.append('files', image); // Match the field name 'files'
+        });
+    
         try {
-            const response = await axios.post('http://localhost:3000/upload', data, {
+            const response = await axios.post('http://localhost:3001/upload', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
             console.log('Success:', response.data);
+            
+            // Reset form data after successful upload
+            setFormData({
+                carName: '',
+                mileage: '',
+                makeYear: '2020',  // Reset to default
+                registrationYear: '2019',  // Reset to default
+                rto: 'CH 01',  // Reset to default
+                noOfOwner: '1',  // Reset to default
+                fuelType: 'Petrol',  // Reset to default
+                transmission: 'Manual',  // Reset to default
+                insuranceType: 'Comprehensive',  // Reset to default
+                insuranceValidity: '2021',  // Reset to default
+                location: '',
+                price: '',
+                images: []
+            });
+            
         } catch (error) {
-            // Improved error handling
-            console.error('Error occurred during upload:');
-            if (error.response) {
-                console.error('Response data:', error.response.data);
-                console.error('Response status:', error.response.status);
-                console.error('Response headers:', error.response.headers);
-            } else if (error.request) {
-                console.error('Request data:', error.request);
-            } else {
-                console.error('Error message:', error.message);
-            }
+            console.error('Error occurred during upload:', error);
         }
     };
 
@@ -73,7 +82,7 @@ function CarForm() {
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                     <InputField label="Car Name" name="carName" type="text" value={formData.carName} onChange={handleInputChange} required />
-                    <InputField label="KM driven" name="kmDriven" type="text" value={formData.kmDriven} onChange={handleInputChange} required />
+                    <InputField label="Mileage" name="mileage" type="text" value={formData.mileage} onChange={handleInputChange} required />
                     <Dropdown label="Make year" name="makeYear" value={formData.makeYear} onChange={handleInputChange} options={['2020', '2021']} />
                     <Dropdown label="Registration year" name="registrationYear" value={formData.registrationYear} onChange={handleInputChange} options={['2019', '2020']} />
                     <Dropdown label="RTO" name="rto" value={formData.rto} onChange={handleInputChange} options={['CH 01', 'CH 02']} />

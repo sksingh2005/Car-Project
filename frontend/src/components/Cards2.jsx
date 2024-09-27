@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CarCard3 from "./Fetched";
 
 const CarCard2 = () => {
   const navigate = useNavigate();
@@ -88,20 +89,14 @@ const CarCard2 = () => {
       imageUrl: "/FORO.jpg",
     },
   ]);
-  useEffect(() => {
-    const fetchImages = async () => {
-        try {
-            const response = await axios.get("http://localhost:3000/get_image");
-            setCarData((prevCarData) => [...prevCarData, ...response.data.images]); // Ensure this is the correct path
-        } catch (error) {
-            console.error("Error fetching images:", error);
-        }
-    };
-
-    fetchImages();
-}, []);
-  const [likedCars, setLikedCars] = useState({});
-
+  const [count, setCount] = useState(0); // Use state to manage count
+  useEffect(()=>{
+    const count1=async()=>{
+      const result=await axios.get("http://localhost:3001/count")
+        setCount(result.data.Count);
+    }
+    count1();
+  },[])
   const toggleLike = (id) => {
     setLikedCars((prev) => ({
       ...prev,
@@ -114,15 +109,15 @@ const CarCard2 = () => {
   return (
     <div>
       <div className="p-4 font-bold text-2xl">
-        <p>169 Used car in Chandigarh</p>
+        <p>{carData.length+count.length} Used car Available</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 ">
         {}
         {filteredCarData
         .map((car) => (
           <div
             key={car.id}
-            className="bg-white rounded-lg shadow-lg border border-gray-200 relative flex flex-col"
+            className="bg-white rounded-lg shadow-lg border border-gray-200 relative flex flex-col cursor-pointer"
           >
             {/* Car Image */}
             <img
@@ -158,6 +153,7 @@ const CarCard2 = () => {
           </div>
         ))}
       </div>
+      {more ? <CarCard3 /> : <div></div>}
       <div className="flex justify-center">
         <div className="flex flex-col justify-center">
       <button onClick={()=>{

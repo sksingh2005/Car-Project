@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export function Form() {
+export default function Form() {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [budget, setBudget] = useState("");

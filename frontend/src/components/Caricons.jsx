@@ -1,4 +1,4 @@
-export function Caricons() {
+export default  function Caricons() {
 
     const middle = [
         {

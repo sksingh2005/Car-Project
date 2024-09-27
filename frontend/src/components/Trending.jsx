@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import CarCard from "./Carcards";
 
-export function Trending(){
+export default function Trending(){
   const navigate=useNavigate()
     return <div>
         <div>

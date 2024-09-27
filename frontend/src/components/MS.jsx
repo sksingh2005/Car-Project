@@ -1,9 +1,12 @@
 import Slider from "react-slick";
-import { CarouselComponent } from "./Slider1";
-import { Form } from "./Form";
-import { Footer } from "./Footer";
+import React, { lazy, Suspense } from "react";
 
-export function Ms(){
+// Lazy loaded components
+const Footer = lazy(() => import("./Footer"));
+const Form = lazy(() => import("./Form"));
+const CarouselComponent = lazy(() => import("./Slider1"));
+
+export default function Ms(){
     const carDetails = {
         makeYear: "May 2021",
         registrationYear: "Aug 2021",

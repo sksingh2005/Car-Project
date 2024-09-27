@@ -41,7 +41,7 @@ const PrevArrow = ({ onClick }) => {
   );
 };
 
-export const CarouselComponent = () => {
+export default function CarouselComponent()  {
   const settings = {
     dots: false, // Disable dots
     infinite: true,
