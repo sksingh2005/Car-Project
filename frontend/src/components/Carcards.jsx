@@ -52,9 +52,13 @@ const CarCard = () => {
         >
           {/* Car Image */}
           <img
-            className="w-full h-48 object-cover rounded-t-lg"
+            className="w-full h-48 object-cover rounded-t-lg cursor-pointer"
             src={car.imageUrl}
-            alt={car.name}
+            alt={car.name} onClick={()=>{
+              if(car.id==1){
+                navigate("/cars/ms")
+              }
+            }}
           />
           <div className="p-2">
           <div className="mt-4 ">

@@ -75,43 +75,61 @@ app.post('/booking', async (req, res) => {
 });
 
 // Zod schema for car details
-const userschema=zod.object({
-  username:zod.string().email(),
-  firstname:zod.string(),
-  lastname:zod.string(),
-  password:zod.string().min(8)
-})
-app.post('/signup',async function(req,res){
-  const input=req.body;
-  const valid=userschema.safeParse(input);
-  if(!valid.success){
-      res.status(411).json({
-          msg:"Invalid entry",
-      })
-      return ;
-  }
-  const dbcheck=await Admin.findOne({
-      username:input.username,
-      firstname:input.firstname,
-      lastname:input.lastname,
-      password:input.password
-  })
-  const entry=await Admin.create({
-      username:input.username,
-      firstname:input.firstname,
-      lastname:input.lastname,
-      password:input.password
-  })
+const userschema = zod.object({
+  username: zod.string().email(),
+  firstname: zod.string(),
+  lastname: zod.string(),
+  password: zod.string().min(8)
+});
 
-  const userid=entry._id;
-  const token=jwt.sign({userid},JWWT_SECRET)
-  if(entry){
-      res.status(200).json({
-          msg:"User created successfully",
-          "token":token
-      })
+app.post('/signup', async function (req, res) {
+  const input = req.body;
+
+  // Validate the input using Zod schema
+  const valid = userschema.safeParse(input);
+  if (!valid.success) {
+    return res.status(411).json({
+      msg: "Invalid entry",
+    });
   }
-})
+
+  try {
+    // Check if the user with the provided email already exists
+    let user = await Admin.findOne({ username: input.username });
+
+    if (user) {
+      // If user exists, generate a token
+      const token = jwt.sign({ userid: user._id }, JWWT_SECRET);
+      return res.status(200).json({
+        msg: "User already exists, returning token",
+        token: token,
+      });
+    }
+
+    // If user doesn't exist, create a new user
+    const entry = await Admin.create({
+      username: input.username,
+      firstname: input.firstname,
+      lastname: input.lastname,
+      password: input.password,
+    });
+
+    // Generate a token for the newly created user
+    const token = jwt.sign({ userid: entry._id }, JWWT_SECRET);
+    return res.status(200).json({
+      msg: "User created successfully",
+      token: token,
+    });
+
+  } catch (error) {
+    console.error("Error during signup:", error.message);  // Log the error for debugging
+    return res.status(500).json({
+      msg: "Internal server error",
+      error: error.message,  // Optionally return the error message for easier debugging
+    });
+  }
+});
+
 
 const signinBody = zod.object({
   username: zod.string().email(),

@@ -15,19 +15,19 @@ export default function Home() {
                         <Navbar />
                     </Suspense>
                 </div>
-                <div className="text-5xl font-serif text-white font-bold m-6 sm:p-18">
-                    <div>
+                <div className="m-4 sm:p-16 text-white font-bold">
+                    <div className="text-3xl sm:text-5xl font-serif">
                         <h1>"Find, Book,</h1>
                         <h1>and Drive your Car in</h1>
                         <h1>Just a few easy</h1>
                         <h1>Steps"</h1>
-                        <p className="text-white text-2xl font-bold pt-3">
-                            Get the car whenever and wherever you need
-                        </p>
                     </div>
+                    <p className="text-lg sm:text-2xl font-bold pt-3">
+                        Get the car whenever and wherever you need
+                    </p>
                 </div>
             </div>
-            <div className="m-10">
+            <div className="m-4 sm:m-10">
                 {/* Suspense with fallback */}
                 <Suspense fallback={<div>Loading Trending...</div>}>
                     <Trending />
